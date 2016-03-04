@@ -11,7 +11,7 @@ var sb;
  * The name of your app. Change this!
  * @type {String}
  */
-var appName = "MyCoolApp";
+var appName = "Simple Mouse Example";
 
 /**
  * Often times, you want to randomize your name.
