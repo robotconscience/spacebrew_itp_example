@@ -28,11 +28,19 @@ var doRandomName = true;
 window.onload = function () {
 	setupSpacebrew();
 	setupUI();
+
+	document.body.onmousemove = function(e){
+		sb.send("mouse", "range", String( e.clientX ) );
+	}
 }
 
 /**
  * Setup Spacebrew object & range catcher
  */
+// var setupSpacebrew = function(){
+
+// }
+
 function setupSpacebrew(){
 
 	if ( doRandomName ){
@@ -46,8 +54,8 @@ function setupSpacebrew(){
 	sb.name(appName);
 
 	// add publishers and subscribers
-	// sb.addPublish("name", "range");
-	// sb.addSubscribe("name", "range");
+	sb.addPublish("mouse", "range");
+	sb.addSubscribe("background", "range");
 
 	// setup listeners
 	sb.onBooleanMessage = onBooleanMessage;
@@ -80,15 +88,18 @@ function onStringMessage( name, value ){
  * @param  {Number} value
  */
 function onRangeMessage( name, value ){
-	// do some stuff!
-	console.log("Range: "+name+":"+value);
+
+	if ( name == "background" ){
+		document.body.style.backgroundColor = "rgb(" + value + "," + value + "," + value + ")";
+	}
+
 }
 
 /**
  * @param  {String} name 
  * @param  {String} value
  */
-function onCustomMessage( name, value ){
+function onCustomMessage( name, type, value ){
 	// do some stuff!
 	console.log("Custom: "+name+":"+value);
 }
